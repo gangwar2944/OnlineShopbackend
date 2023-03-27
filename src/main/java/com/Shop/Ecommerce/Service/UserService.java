@@ -1,11 +1,11 @@
 package com.Shop.Ecommerce.Service;
 
-import com.Shop.Ecommerce.Entity.User;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
+import com.Shop.Ecommerce.Response.MessageResponse;
+import org.springframework.stereotype.Component;
 
 @Component
 public interface UserService {
-    List<User> getUserList();
+    MessageResponse getUserList();
+
 }

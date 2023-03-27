@@ -1,15 +1,10 @@
 package com.Shop.Ecommerce.Controller;
 
 
-import com.Shop.Ecommerce.Entity.User;
+import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.UserService;
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
@@ -18,9 +13,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/getData")
-    public List<User> getUser(){
+    public MessageResponse getUser(){
 
-        return userService.getUserList();
-
+       return userService.getUserList();
     }
+
 }
