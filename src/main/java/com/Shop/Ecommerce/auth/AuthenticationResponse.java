@@ -1,5 +1,6 @@
 package com.Shop.Ecommerce.auth;
 
+import com.Shop.Ecommerce.Entity.Role;
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,4 +13,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
     private String token;
+
 }
