@@ -3,11 +3,11 @@ package com.Shop.Ecommerce.ServiceImpl;
 import com.Shop.Ecommerce.Entity.User;
 import com.Shop.Ecommerce.EntityDto.UserDto;
 import com.Shop.Ecommerce.Repository.UserRepository;
+import com.Shop.Ecommerce.Response.HttpStatus;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         data.forEach(x->{
             userDtos.add(modelMapper.map(x,UserDto.class));
         });
-        return new MessageResponse("All data list",HttpStatus.FOUND,userDtos);
+        return new MessageResponse("All data list", HttpStatus.FOUND,userDtos);
     }
 
 }

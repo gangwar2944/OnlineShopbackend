@@ -1,10 +1,9 @@
 package com.Shop.Ecommerce.auth;
 
-import com.Shop.Ecommerce.Entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor

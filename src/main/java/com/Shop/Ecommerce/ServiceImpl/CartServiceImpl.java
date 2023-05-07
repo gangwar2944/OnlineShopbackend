@@ -3,11 +3,11 @@ package com.Shop.Ecommerce.ServiceImpl;
 import com.Shop.Ecommerce.Entity.Cart;
 import com.Shop.Ecommerce.EntityDto.CartDto;
 import com.Shop.Ecommerce.Repository.CartRepo;
+import com.Shop.Ecommerce.Response.HttpStatus;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.CartService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -41,7 +41,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto updateCart(CartDto cartDto) {
         Cart cart = cartRepo.findById(cartDto.getId()).get();
-        Cart save = cartRepo.save(cart);
+        Cart cart1 = modelMapper.map(cartDto,Cart.class);
+        Cart save = cartRepo.save(cart1);
         return modelMapper.map(save,CartDto.class);
     }
 
@@ -50,9 +51,9 @@ public class CartServiceImpl implements CartService {
         Optional<Cart> byId = cartRepo.findById(cartId);
         if(byId.isPresent()){
             cartRepo.deleteById(cartId);
-           return new MessageResponse("item remove successfully", HttpStatus.ACCEPTED);
+           return new MessageResponse("item remove successfully", HttpStatus.FOUND);
         }else{
-            return new MessageResponse("there are no item is present in db from this id",HttpStatus.NO_CONTENT);
+            return new MessageResponse("there are no item is present in db from this id",HttpStatus.NOT_FOUND);
         }
 
     }

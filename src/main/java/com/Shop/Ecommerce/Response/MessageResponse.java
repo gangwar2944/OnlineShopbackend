@@ -1,6 +1,5 @@
 package com.Shop.Ecommerce.Response;
 import lombok.Builder;
-import org.springframework.http.HttpStatus;
 
 @Builder
 public class MessageResponse{

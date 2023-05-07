@@ -20,8 +20,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long OrderId;
 
-    @OneToMany(mappedBy = "orders")
-    private List<Product> products;
+//    @OneToMany(mappedBy = "orders")
+//    private List<Product> products;
 
     private Integer amount;
     private String address;

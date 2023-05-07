@@ -1,13 +1,14 @@
 package com.Shop.Ecommerce.Controller;
 
-import com.Shop.Ecommerce.EntityDto.CartDto;
 import com.Shop.Ecommerce.EntityDto.ProductDto;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductController {
@@ -15,6 +16,7 @@ public class ProductController {
 
         @Autowired
         ProductService productService;
+
         @GetMapping("/getAll")
         public List<ProductDto> getAllProducts(){
             return productService.getAllProducts();
@@ -25,7 +27,7 @@ public class ProductController {
             return productService.getByIdProduct(id);
         }
 
-        @PostMapping("/saveCart")
+        @PostMapping("/saveProduct")
         public ProductDto saveCart(@RequestBody ProductDto productDto){
             if(productDto.getId()!=null){
                 return productService.updateProduct(productDto);
@@ -34,7 +36,7 @@ public class ProductController {
             }
         }
 
-        @DeleteMapping("/deleteCart/{id}")
+        @DeleteMapping("/deleteProduct/{id}")
         public MessageResponse deleteCart(@PathVariable Long id){
             return productService.deleteProduct(id);
         }

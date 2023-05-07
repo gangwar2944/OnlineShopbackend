@@ -3,11 +3,11 @@ package com.Shop.Ecommerce.ServiceImpl;
 import com.Shop.Ecommerce.Entity.Product;
 import com.Shop.Ecommerce.EntityDto.ProductDto;
 import com.Shop.Ecommerce.Repository.ProductRepo;
+import com.Shop.Ecommerce.Response.HttpStatus;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -45,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto updateProduct(ProductDto productDto) {
+        Product order = productRepo.findById(productDto.getId()).get();
         Product product = modelMapper.map(productDto,Product.class);
         Product save = productRepo.save(product);
         return modelMapper.map(save,ProductDto.class);
@@ -62,9 +63,9 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> byId = productRepo.findById(id);
         if(byId.isPresent()){
             productRepo.deleteById(id);
-            return new MessageResponse("item remove successfully", HttpStatus.ACCEPTED);
+            return new MessageResponse("item remove successfully", HttpStatus.SUCCESS);
         }else{
-            return new MessageResponse("there are no item is present in db from this id",HttpStatus.NO_CONTENT);
+            return new MessageResponse("there are no item is present in db from this id",HttpStatus.NOT_FOUND);
         }
     }
 }
