@@ -23,8 +23,11 @@ public class Product {
     private String description;
     private String image;
 
-    @ManyToMany
-    private Set<Category> categories;
+//    @ManyToMany
+//    private Set<Category> categories;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
 
     private String size;
     private String color;
@@ -32,11 +35,6 @@ public class Product {
 
     @ManyToMany
     private Set<Cart> cart;
-
-//    @ManyToOne
-//    @JoinColumn(name = "fk_order")
-//    private Order orders;
-
 
     public Long getId() {
         return id;
@@ -68,14 +66,6 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
     }
 
     public String getSize() {

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -18,7 +20,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String catName;
-    @ManyToMany
-    private Set<Product> products;
+//    @ManyToMany
+//    private Set<Product> products;
+
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<Product> posts = new ArrayList<>();
 
 }
