@@ -20,10 +20,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String catName;
-//    @ManyToMany
-//    private Set<Product> products;
-
+    private String title;
+    private String img;
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<Product> posts = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
 }

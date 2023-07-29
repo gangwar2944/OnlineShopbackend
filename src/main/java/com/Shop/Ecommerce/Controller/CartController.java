@@ -1,6 +1,5 @@
 package com.Shop.Ecommerce.Controller;
 
-import com.Shop.Ecommerce.Entity.Cart;
 import com.Shop.Ecommerce.EntityDto.CartDto;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.CartService;
@@ -15,11 +14,16 @@ public class CartController {
 
     @Autowired
     CartService cartService;
+
     @GetMapping("/getAll")
     public List<CartDto> getAllCart(){
         return cartService.getAllCarts();
     }
 
+    @GetMapping("/getAllCart/{userId}")
+    public MessageResponse getCartDataByUserId(@PathVariable Long userId){
+        return cartService.getCartDataByUserId(userId);
+    }
     @GetMapping("/getAll/{id}")
     public MessageResponse getAllCart(@PathVariable Long id){
         return cartService.getByIdCarts(id);

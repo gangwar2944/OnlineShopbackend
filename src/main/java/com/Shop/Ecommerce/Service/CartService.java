@@ -19,4 +19,6 @@ public interface CartService {
 
      MessageResponse getByIdCarts(Long id);
 
+    MessageResponse getCartDataByUserId(Long userId);
+
 }

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,9 +34,17 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto saveCart(CartDto cartDto) {
         Cart cart = modelMapper.map(cartDto,Cart.class);
-        Cart save = cartRepo.save(cart);
-        return modelMapper.map(save,CartDto.class);
-
+        Optional<Cart> cart2 = cartRepo.findByUserId(cart.getUserId().getId());
+        if(cart2.isPresent()){
+            cart2.get().setProducts(cart.getProducts());
+            cart2.get().setQuantity(cart.getQuantity());
+            cart2.get().setTotal(cart.getTotal());
+            Cart save = cartRepo.save(cart2.get());
+            return modelMapper.map(save,CartDto.class);
+        }else{
+            Cart save = cartRepo.save(cart);
+            return modelMapper.map(save,CartDto.class);
+        }
     }
 
     @Override
@@ -67,5 +76,16 @@ public class CartServiceImpl implements CartService {
             return new MessageResponse("data not found from this id",HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @Override
+    public MessageResponse getCartDataByUserId(Long userId) {
+
+        Optional<Cart> cart = cartRepo.findByUserId(userId);
+        if(cart.isPresent()){
+            return new MessageResponse("this is record",HttpStatus.FOUND,modelMapper.map(cart,CartDto.class));
+        }else{
+            return new MessageResponse("data not found from this id",HttpStatus.NOT_FOUND);
+        }
     }
 }

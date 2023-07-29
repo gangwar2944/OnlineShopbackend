@@ -16,5 +16,6 @@ public class CartDto {
     private Long id;
     private User userId;
     private List<ProductDto> products;
-    private Integer counting;
+    private Integer quantity;
+    private Integer total;
 }

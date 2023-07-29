@@ -20,4 +20,6 @@ public interface ProductService {
     ProductDto saveProduct(ProductDto productDto);
 
     MessageResponse deleteProduct(Long id);
+
+    List<ProductDto> getAllProductsByCatgoryId(Long catId);
 }

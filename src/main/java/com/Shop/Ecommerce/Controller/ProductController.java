@@ -17,9 +17,18 @@ public class ProductController {
         @Autowired
         ProductService productService;
 
+
+//        @GetMapping("/getAll")
+//        public List<ProductDto> getAllProducts(){
+//            return productService.getAllProducts();
+//        }
         @GetMapping("/getAll")
-        public List<ProductDto> getAllProducts(){
-            return productService.getAllProducts();
+        public List<ProductDto> getAllProductsByCategory(@RequestParam Long catId){
+            if(catId!= 0L){
+                return productService.getAllProductsByCatgoryId(catId);
+            }else{
+                return productService.getAllProducts();
+            }
         }
 
         @GetMapping("/getAll/{id}")

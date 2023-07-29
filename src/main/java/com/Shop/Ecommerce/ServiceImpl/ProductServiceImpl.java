@@ -1,6 +1,8 @@
 package com.Shop.Ecommerce.ServiceImpl;
 
+import com.Shop.Ecommerce.Entity.Category;
 import com.Shop.Ecommerce.Entity.Product;
+import com.Shop.Ecommerce.EntityDto.CategoryDto;
 import com.Shop.Ecommerce.EntityDto.ProductDto;
 import com.Shop.Ecommerce.Repository.ProductRepo;
 import com.Shop.Ecommerce.Response.HttpStatus;
@@ -66,6 +68,16 @@ public class ProductServiceImpl implements ProductService {
             return new MessageResponse("item remove successfully", HttpStatus.SUCCESS);
         }else{
             return new MessageResponse("there are no item is present in db from this id",HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
+    public List<ProductDto> getAllProductsByCatgoryId(Long catId) {
+        List<Product> byCategoryId = productRepo.findByCategoryId(catId);
+        if(!byCategoryId.equals(null)){
+            return byCategoryId.stream().map(cat -> this.modelMapper.map(cat, ProductDto.class)).collect(Collectors.toList());
+        }else{
+            return null;
         }
     }
 }

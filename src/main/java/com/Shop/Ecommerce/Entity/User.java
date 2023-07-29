@@ -1,5 +1,6 @@
 package com.Shop.Ecommerce.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,10 +23,10 @@ import java.util.List;
 public class User implements UserDetails {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long userId;
-   private String firstName;
+   private Long id;
+   private String firstname;
 
-   private String lastName;
+   private String lastname;
    private String email;
 
    public String getEmail() {
@@ -40,6 +41,7 @@ public class User implements UserDetails {
    private Boolean isAdmin = false;
    private Timestamp orderDate = Timestamp.from(Instant.now());
 
+   @JsonIgnore
    @Enumerated(EnumType.STRING)
    private Role role;
 

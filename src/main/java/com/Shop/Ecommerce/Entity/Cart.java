@@ -24,5 +24,7 @@ public class Cart {
     @ManyToMany
     private List<Product> products;
 
-    private Integer counting;
+    private Integer quantity;
+
+    private Integer total;
 }
