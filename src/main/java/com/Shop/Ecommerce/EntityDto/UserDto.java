@@ -2,6 +2,8 @@ package com.Shop.Ecommerce.EntityDto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,4 +16,6 @@ public class UserDto {
     private String lastname;
     private String email;
     private String password;
+    private Date dob;
+    private String region;
 }

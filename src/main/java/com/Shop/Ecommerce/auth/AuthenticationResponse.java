@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,5 +18,8 @@ public class AuthenticationResponse {
     private Long id;
     private String firstname;
     private String email;
+    private String lastname;
+    private Date dob;
+    private String region;
 
 }

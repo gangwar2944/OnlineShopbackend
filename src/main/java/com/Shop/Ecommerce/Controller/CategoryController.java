@@ -23,7 +23,7 @@ public class CategoryController {
         return categoryService.getCategoriesById(id);
     }
 
-    @PostMapping("/saveCart")
+    @PostMapping("/saveCategory")
     public CategoryDto saveCart(@RequestBody CategoryDto categoryDto){
         if(categoryDto.getId()!=null){
             return categoryService.updateCategory(categoryDto);
@@ -32,7 +32,7 @@ public class CategoryController {
         }
     }
 
-    @DeleteMapping("/deleteCart/{id}")
+    @DeleteMapping("/deleteCategory/{id}")
     public MessageResponse deleteCart(@PathVariable Long id){
         return categoryService.deleteCategory(id);
     }

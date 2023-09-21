@@ -23,12 +23,10 @@ public class ProductController {
 //            return productService.getAllProducts();
 //        }
         @GetMapping("/getAll")
-        public List<ProductDto> getAllProductsByCategory(@RequestParam Long catId){
-            if(catId!= 0L){
-                return productService.getAllProductsByCatgoryId(catId);
-            }else{
+        public List<ProductDto> getAllProductsByCategory(){
+
                 return productService.getAllProducts();
-            }
+
         }
 
         @GetMapping("/getAll/{id}")

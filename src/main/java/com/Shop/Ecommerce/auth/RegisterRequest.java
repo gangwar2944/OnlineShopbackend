@@ -2,6 +2,8 @@ package com.Shop.Ecommerce.auth;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,4 +15,6 @@ public class RegisterRequest {
     private String lastname;
     private String email;
     private String password;
+    private Date dob;
+    private String region;
 }

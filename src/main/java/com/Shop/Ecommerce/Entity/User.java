@@ -7,10 +7,9 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -28,7 +27,8 @@ public class User implements UserDetails {
 
    private String lastname;
    private String email;
-
+   private Date dob;
+   private String region;
    public String getEmail() {
       return email;
    }
@@ -39,7 +39,7 @@ public class User implements UserDetails {
 
    private String password;
    private Boolean isAdmin = false;
-   private Timestamp orderDate = Timestamp.from(Instant.now());
+//   private Timestamp orderDate = Timestamp.from(Instant.now());
 
    @JsonIgnore
    @Enumerated(EnumType.STRING)

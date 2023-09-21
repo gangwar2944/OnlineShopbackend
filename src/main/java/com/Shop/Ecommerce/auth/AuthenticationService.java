@@ -28,6 +28,8 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
+                .dob(request.getDob())
+                .region(request.getRegion())
                 .build();
         User user1 = userRepository.save(user);
 
@@ -37,6 +39,8 @@ public class AuthenticationService {
                 .id(user.getId())
                 .firstname(user.getFirstname())
                 .email(user.getEmail())
+                .dob(user.getDob())
+                .region(user.getRegion())
                 .build();
     }
 
@@ -55,6 +59,9 @@ public class AuthenticationService {
                 .id(user.getId())
                 .firstname(user.getFirstname())
                 .email(user.getEmail())
+                .lastname(user.getLastname())
+                .region(user.getRegion())
+                .dob(user.getDob())
                 .build();
     }
 }
