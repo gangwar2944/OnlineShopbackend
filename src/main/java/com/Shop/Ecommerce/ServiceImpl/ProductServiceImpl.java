@@ -4,9 +4,11 @@ import com.Shop.Ecommerce.Entity.Category;
 import com.Shop.Ecommerce.Entity.Product;
 import com.Shop.Ecommerce.EntityDto.CategoryDto;
 import com.Shop.Ecommerce.EntityDto.ProductDto;
+import com.Shop.Ecommerce.Repository.CategoryRepo;
 import com.Shop.Ecommerce.Repository.ProductRepo;
 import com.Shop.Ecommerce.Response.HttpStatus;
 import com.Shop.Ecommerce.Response.MessageResponse;
+import com.Shop.Ecommerce.Service.CategoryService;
 import com.Shop.Ecommerce.Service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepo productRepo;
 
+    @Autowired
+    private CategoryRepo categoryRepo;
     @Autowired
     ModelMapper modelMapper;
 
@@ -47,15 +51,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto updateProduct(ProductDto productDto) {
+        Category category = categoryRepo.findById(productDto.getCategoryId()).orElse(null);
+
         Product order = productRepo.findById(productDto.getId()).get();
         Product product = modelMapper.map(productDto,Product.class);
+        product.setCategory(category);
         Product save = productRepo.save(product);
         return modelMapper.map(save,ProductDto.class);
     }
 
     @Override
     public ProductDto saveProduct(ProductDto productDto) {
+
+        Category category = categoryRepo.findById(productDto.getCategoryId()).orElse(null);
+
         Product product = modelMapper.map(productDto,Product.class);
+        product.setCategory(category);
         Product save = productRepo.save(product);
         return modelMapper.map(save,ProductDto.class);
     }

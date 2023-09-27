@@ -18,18 +18,13 @@ public class ProductController {
         ProductService productService;
 
 
-//        @GetMapping("/getAll")
-//        public List<ProductDto> getAllProducts(){
-//            return productService.getAllProducts();
-//        }
         @GetMapping("/getAll")
         public List<ProductDto> getAllProductsByCategory(){
 
                 return productService.getAllProducts();
 
         }
-
-        @GetMapping("/getAll/{id}")
+        @GetMapping("/getProduct/{id}")
         public MessageResponse getAllCart(@PathVariable Long id){
             return productService.getByIdProduct(id);
         }

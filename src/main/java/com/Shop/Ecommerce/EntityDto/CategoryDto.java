@@ -19,6 +19,4 @@ public class CategoryDto {
     private String catName;
     private String title;
     private String img;
-
-    private List<ProductDto> products;
 }

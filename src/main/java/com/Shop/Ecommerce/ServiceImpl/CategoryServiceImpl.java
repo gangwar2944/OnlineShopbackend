@@ -42,10 +42,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto updateCategory(CategoryDto cartDto) {
-        Category cart = categoryRepo.findById(cartDto.getId()).get();
-        Category cart1 = modelMapper.map(cartDto,Category.class);
-        Category save = categoryRepo.save(cart1);
-        return modelMapper.map(save,CategoryDto.class);
+        Optional<Category> cat = categoryRepo.findById(cartDto.getId());
+        if(cat.isPresent()){
+            Category cart1 = modelMapper.map(cartDto,Category.class);
+            Category save = categoryRepo.save(cart1);
+            return modelMapper.map(save,CategoryDto.class);
+        }else{
+            return null;
+        }
+
     }
 
     @Override

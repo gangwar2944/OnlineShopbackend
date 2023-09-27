@@ -22,7 +22,5 @@ public class Category {
     private String catName;
     private String title;
     private String img;
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
 
 }

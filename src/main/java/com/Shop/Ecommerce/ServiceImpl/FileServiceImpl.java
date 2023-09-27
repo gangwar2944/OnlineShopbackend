@@ -60,4 +60,19 @@ public class FileServiceImpl implements FileService {
         InputStream inputStream = new FileInputStream(fullPath);
         return inputStream;
     }
+
+    public void deleteImage(String path, String fileName) throws FileNotFoundException {
+        String fullPath = path + File.separator + fileName;
+        File imageFile = new File(fullPath);
+
+        if (imageFile.exists()) {
+            if (imageFile.delete()) {
+                System.out.println("Image deleted successfully.");
+            } else {
+                System.err.println("Failed to delete the image.");
+            }
+        } else {
+            System.err.println("Image not found at: " + fullPath);
+        }
+    }
 }

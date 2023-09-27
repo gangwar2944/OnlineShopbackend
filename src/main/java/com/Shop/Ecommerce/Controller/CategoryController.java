@@ -19,7 +19,7 @@ public class CategoryController {
         return categoryService.getAllCategoris();
     }
     @GetMapping("/getAll/{id}")
-    public MessageResponse getAllCart(@PathVariable Long id){
+    public MessageResponse getCategoryById(@PathVariable Long id){
         return categoryService.getCategoriesById(id);
     }
 
