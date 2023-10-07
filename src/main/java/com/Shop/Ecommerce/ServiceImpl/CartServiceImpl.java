@@ -1,8 +1,10 @@
 package com.Shop.Ecommerce.ServiceImpl;
 
 import com.Shop.Ecommerce.Entity.Cart;
+import com.Shop.Ecommerce.Entity.User;
 import com.Shop.Ecommerce.EntityDto.CartDto;
 import com.Shop.Ecommerce.Repository.CartRepo;
+import com.Shop.Ecommerce.Repository.UserRepository;
 import com.Shop.Ecommerce.Response.HttpStatus;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.CartService;
@@ -21,6 +23,8 @@ public class CartServiceImpl implements CartService {
     CartRepo cartRepo;
 
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     ModelMapper modelMapper;
 
     @Override
@@ -34,17 +38,23 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto saveCart(CartDto cartDto) {
         Cart cart = modelMapper.map(cartDto,Cart.class);
-        Optional<Cart> cart2 = cartRepo.findByUserId(cart.getUserId().getId());
-        if(cart2.isPresent()){
-            cart2.get().setProducts(cart.getProducts());
-            cart2.get().setQuantity(cart.getQuantity());
-            cart2.get().setTotal(cart.getTotal());
-            Cart save = cartRepo.save(cart2.get());
-            return modelMapper.map(save,CartDto.class);
+        Optional<User> byId = userRepository.findById(cartDto.getUserId());
+        if(byId.isPresent()){
+            Optional<Cart> cart2 = cartRepo.findByUserId(cart.getUserId().getId());
+            if(cart2.isPresent()){
+                cart2.get().setProducts(cart.getProducts());
+                cart2.get().setQuantity(cart.getQuantity());
+                cart2.get().setTotal(cart.getTotal());
+                Cart save = cartRepo.save(cart2.get());
+                return modelMapper.map(save,CartDto.class);
+            }else{
+                Cart save = cartRepo.save(cart);
+                return modelMapper.map(save,CartDto.class);
+            }
         }else{
-            Cart save = cartRepo.save(cart);
-            return modelMapper.map(save,CartDto.class);
+            return null;
         }
+
     }
 
     @Override

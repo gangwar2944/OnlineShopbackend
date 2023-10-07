@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -24,11 +26,35 @@ public class User implements UserDetails {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
    private String firstname;
-
    private String lastname;
    private String email;
    private Date dob;
    private String region;
+   private String password;
+   private Boolean isAdmin = false;
+
+   private LocalDate createdDate;
+
+   @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+   private List<Address> address = new ArrayList<>();
+
+   @Embedded
+   @ElementCollection
+   @CollectionTable(name="payment_information",joinColumns = @JoinColumn(name = "user_id"))
+   private List<PaymentInformation> paymentInformations = new ArrayList<>();
+
+   @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+   @JsonIgnore
+   private List<Rating> ratings = new ArrayList<>();
+
+   @JsonIgnore
+   @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+   private List<Review> reviews = new ArrayList<>();
+
+   @JsonIgnore
+   @Enumerated(EnumType.STRING)
+   private Role role;
+
    public String getEmail() {
       return email;
    }
@@ -36,14 +62,6 @@ public class User implements UserDetails {
    public void setEmail(String email) {
       this.email = email;
    }
-
-   private String password;
-   private Boolean isAdmin = false;
-//   private Timestamp orderDate = Timestamp.from(Instant.now());
-
-   @JsonIgnore
-   @Enumerated(EnumType.STRING)
-   private Role role;
 
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,8 +1,10 @@
 package com.Shop.Ecommerce.Service;
 
+import com.Shop.Ecommerce.Entity.Product;
 import com.Shop.Ecommerce.EntityDto.CartDto;
 import com.Shop.Ecommerce.EntityDto.ProductDto;
 import com.Shop.Ecommerce.Response.MessageResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +24,6 @@ public interface ProductService {
     MessageResponse deleteProduct(Long id);
 
     List<ProductDto> getAllProductsByCatgoryId(Long catId);
+
+//    public Page<Product> getAllProduct();
 }

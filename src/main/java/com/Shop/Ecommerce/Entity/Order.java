@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -20,10 +22,32 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long OrderId;
 
-//    @OneToMany(mappedBy = "orders")
-//    private List<Product> products;
+    private double price;
 
-    private Integer amount;
-    private String address;
-    private String pending;
+    private Integer totalDiscountPrice;
+
+    @Column(name = "status", insertable = false, updatable = false)
+    private String status;
+
+    private Integer totalItem;
+
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    private User user;
+
+    // In the Order entity
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+
+    private LocalDateTime orderDate;
+    private LocalDateTime deliveryDate;
+
+    @OneToOne
+    private Address shippingAddress;
+
+    @Embedded
+    private PaymentDetail paymentDetail = new PaymentDetail();
+
 }
