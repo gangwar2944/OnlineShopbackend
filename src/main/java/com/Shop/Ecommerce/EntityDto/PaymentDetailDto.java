@@ -1,4 +1,4 @@
-package com.Shop.Ecommerce.Entity;
+package com.Shop.Ecommerce.EntityDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDetail {
+public class PaymentDetailDto {
 
     private String paymentMethod;
     private String status;

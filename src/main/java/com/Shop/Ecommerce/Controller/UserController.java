@@ -5,6 +5,7 @@ import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {

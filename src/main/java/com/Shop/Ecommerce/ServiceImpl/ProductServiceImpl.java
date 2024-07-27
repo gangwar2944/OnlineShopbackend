@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,12 +33,18 @@ public class ProductServiceImpl implements ProductService {
     ModelMapper modelMapper;
 
     @Override
-    public List<ProductDto> getAllProducts() {
-        List<Product> all = productRepo.findAll();
-        List<ProductDto> collect = all.stream().map(x -> this.modelMapper.map(x, ProductDto.class)).collect(Collectors.toList());
-
-        return collect;
+    public List<ProductDto> getAllProducts(Long catId) {
+        List<Product> prodList;
+        if (catId == 0) {
+            prodList = productRepo.findAll();
+        } else {
+            prodList = productRepo.findByCategoryId(catId);
+        }
+        return prodList.stream()
+                .map(product -> modelMapper.map(product, ProductDto.class))
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public MessageResponse getByIdProduct(Long id) {

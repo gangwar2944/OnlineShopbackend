@@ -17,4 +17,5 @@ public class AddressDto {
     private String area;
     private Long pinCode;
     private Long phoneNumber;
+    private Long userId;
 }

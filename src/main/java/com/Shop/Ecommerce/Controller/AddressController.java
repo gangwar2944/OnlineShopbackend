@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/address/")
 public class AddressController {
@@ -37,10 +38,10 @@ public class AddressController {
     }
 
     @PostMapping("saveAndUpdateAddress")
-    MessageResponse saveNewAddres(@RequestBody AddressDto addressDto,@RequestParam Long userId){
+    MessageResponse saveNewAddres(@RequestBody AddressDto addressDto){
 
         if(addressDto.getId()==null){
-            AddressDto savedAddress = addressService.saveAddress(addressDto, userId);
+            AddressDto savedAddress = addressService.saveAddress(addressDto, addressDto.getUserId());
 
             return new MessageResponse("Address saved successfully ", HttpStatus.SUCCESS,savedAddress);
         }else{

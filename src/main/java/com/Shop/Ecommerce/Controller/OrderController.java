@@ -5,18 +5,19 @@ import com.Shop.Ecommerce.EntityDto.ProductDto;
 import com.Shop.Ecommerce.Repository.OrderRepo;
 import com.Shop.Ecommerce.Response.MessageResponse;
 import com.Shop.Ecommerce.Service.OrderService;
+import com.Shop.Ecommerce.unit.PathUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/v1/order")
+@RequestMapping(PathUrl.BASE_URL)
 public class OrderController {
 
     @Autowired
     OrderService orderService;
-    @GetMapping("/getAll")
+    @GetMapping(PathUrl.GET_ALL_ORDER)
     public List<OrderDto> getAllOrder(){
         return orderService.getAllOrders();
     }

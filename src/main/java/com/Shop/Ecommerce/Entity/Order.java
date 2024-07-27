@@ -1,5 +1,6 @@
 package com.Shop.Ecommerce.Entity;
 
+import com.Shop.Ecommerce.EntityDto.PaymentDetailDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,6 +49,6 @@ public class Order {
     private Address shippingAddress;
 
     @Embedded
-    private PaymentDetail paymentDetail = new PaymentDetail();
+    private PaymentDetailDto paymentDetail = new PaymentDetailDto();
 
 }

@@ -19,11 +19,10 @@ public class ProductController {
 
 
         @GetMapping("/getAll")
-        public List<ProductDto> getAllProductsByCategory(){
-
-                return productService.getAllProducts();
-
+        public List<ProductDto> getAllProductsByCategory(@RequestParam Long catId){
+                return productService.getAllProducts(catId);
         }
+
         @GetMapping("/getProduct/{id}")
         public MessageResponse getAllCart(@PathVariable Long id){
             return productService.getByIdProduct(id);
